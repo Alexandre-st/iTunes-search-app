@@ -1,39 +1,37 @@
-import axios from "axios";
-import { useEffect, useState } from "react";
+import axios from 'axios';
+import { useEffect, useState } from 'react';
 
-// // const { RAPID_API_KEY } = "@env";
+export type dataTypes = {
+  artistId: string;
+  artistName: string;
+  artworkUrl100: string;
+  artistViewUrl: string;
+};
 
-// // const rapidApiKey = RAPID_API_KEY;
-// // const rapidApiKey = process.env.REACT_APP_RAPID_API_KEY;
-
-// // console.log(process.env.REACT_APP_RAPID_API_KEY);
-
-// // const key = "8ed0a72786msha0aaaa5095ab43ap1b6f49jsn80edfe1e6762";
-
-// const useFetch = (endpoint, query) => {
-const useFetch = () => {
-  const [data, setData] = useState<string[]>([]);
+const useFetch = (endpoint: string) => {
+  const [data, setData] = useState<dataTypes[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [error, setError] = useState(null);
-
-  const options = {
-    method: "GET",
-    url: `https://itunes.apple.com/search?`,
-    headers: {
-      "X-RapidAPI-Key": "",
-      "X-RapidAPI-Host": "",
-    },
-    // params: { ...query },
-  };
+  const [error, setError] = useState<string | null>(null);
 
   const fetchData = async () => {
+    if (!endpoint) {
+      setData([]);
+      return;
+    }
+
     setIsLoading(true);
+    // &entity=musicArtist&limit=5&country=fr&sort=recent
     try {
-      // const response = await axios.request(options);
-      // setData(response.data.data);
+      const response = await fetch(
+        `https://itunes.apple.com/search?term=${endpoint}&entity=musicTrack&limit=5&sort=recent`
+      );
+      const jsonData = await response.json();
+      setData(jsonData.results);
+      console.log(jsonData.results);
+
       setIsLoading(false);
     } catch (error) {
-      // setError(error);
+      setError(error as string);
     } finally {
       setIsLoading(false);
     }
@@ -43,12 +41,12 @@ const useFetch = () => {
     fetchData();
   }, []);
 
-  const refetch = () => {
-    setIsLoading(true);
-    fetchData();
-  };
+  // const refetch = () => {
+  //   setIsLoading(true);
+  //   fetchData();
+  // };
 
-  return { data, isLoading, error, refetch };
+  return { data, isLoading, error };
 };
 
 export default useFetch;
