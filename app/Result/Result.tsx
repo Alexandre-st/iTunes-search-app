@@ -1,5 +1,5 @@
 import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { dataTypes } from '../../hook/useFetch';
+import { dataTypes } from '../search/Search';
 
 type Props = {
   item: dataTypes;
@@ -9,10 +9,12 @@ const Result = (props: Props) => {
   const { item } = props;
 
   return (
-    <TouchableOpacity style={styles.item}>
-      <Image style={styles.image} source={{ uri: item.artworkUrl100 }}  />
-      <Text style={styles.text}>{item.artistName}</Text>
-    </TouchableOpacity>
+    <View>
+      <TouchableOpacity style={styles.item}>
+        <Image style={styles.image} source={{ uri: item.artworkUrl100 }} />
+        <Text style={styles.text}>{item.artistName}</Text>
+      </TouchableOpacity>
+    </View>
   );
 };
 
@@ -22,11 +24,12 @@ const styles = StyleSheet.create({
     padding: 10,
     borderBottomWidth: 1,
     borderBottomColor: '#ccc',
+    marginTop: 60
   },
   image: {
     width: 50,
     height: 50,
-    marginRight: 10,
+    marginRight: 20,
   },
   text: {
     fontSize: 18,
@@ -35,3 +38,4 @@ const styles = StyleSheet.create({
 });
 
 export default Result;
+
