@@ -1,5 +1,6 @@
 // // import axios from 'axios';
 // import { useEffect, useState } from 'react';
+// import { dataTypes } from '../app/search/Search';
 
 // const useFetch = (endpoint: string, type: string) => {
 //   const [data, setData] = useState<dataTypes[]>([]);
@@ -13,8 +14,7 @@
 //     }
 
 //     setIsLoading(true);
-//     // &entity=musicArtist&limit=5&country=fr&sort=recent
-//     // musicTrack
+
 //     try {
 //       const response = await fetch(
 //         `https://itunes.apple.com/search?term=${endpoint}&entity=${type}&limit=5&sort=recent`
@@ -34,11 +34,6 @@
 //   useEffect(() => {
 //     fetchData();
 //   }, []);
-
-//   // const refetch = () => {
-//   //   setIsLoading(true);
-//   //   fetchData();
-//   // };
 
 //   return { data, isLoading, error };
 // };

@@ -1,13 +1,7 @@
 import { useEffect, useState } from 'react';
 import { ActivityIndicator, FlatList, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
-import Result from '../Result/Result';
-
-export type dataTypes = {
-  artistId: string;
-  artistName: string;
-  artworkUrl100: string;
-  artistViewUrl: string;
-};
+import Result from '../../components/Result';
+import { dataTypes } from '../../types/typesFile';
 
 const Search = () => {
   const [searchArtist, setSearchArtist] = useState<string>("");
@@ -25,10 +19,12 @@ const Search = () => {
     setIsLoading(true);
     try {
       const response = await fetch(
-        `https://itunes.apple.com/search?term=${searchArtist}&entity=${type}&limit=1&sort=recent`
+        `https://itunes.apple.com/search?term=${searchArtist}&entity=${type}&limit=4&sort=recent`
       );
       const jsonData = await response.json();
       setData(jsonData.results);
+      console.log(jsonData);
+      
       setIsLoading(false);
     } catch (error) {
       setError(error as string);
@@ -70,12 +66,22 @@ const Search = () => {
         </TouchableOpacity>
       </View>
 
-      {isLoading && <ActivityIndicator size='large' color='#0000ff' />}
+      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }} >
+
+        {isLoading && (
+          <ActivityIndicator size='large' color='#0000ff' />
+        )}
+      </View>
       {error && <Text style={{ color: 'red' }}>{error}</Text>}
+      {/* Add for the keyExtractor the index.
+        Because the API can render the same artist twice. 
+        And it need to have an unique ID, with the index concatenate the issue is solved.
+      */}
       <FlatList 
         data={data} 
         renderItem={({ item }) => <Result item={item} />} 
-        keyExtractor={(item) => item.artistId} 
+        keyExtractor={(item, index) => item.artistId + index} 
+        style={{ marginTop: 60 }}
       />
     </View>
   );
