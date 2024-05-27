@@ -1,33 +1,19 @@
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { Image } from 'react-native';
-import Ionicons from 'react-native-vector-icons/Ionicons';
+import { createStackNavigator } from '@react-navigation/stack';
+import Detail from '../detailId/Detail';
 import Home from '../home/Home';
 import Search from '../search/Search';
 
-const Root = () => {
-  const Tab = createBottomTabNavigator();
+const Stack = createStackNavigator();
 
+const Root = () => {
   return (
-    <Tab.Navigator>
-      <Tab.Screen
-        name='Home'
-        component={Home}
-        options={{
-          tabBarIcon: ({ size, focused, color }) => {
-            return (
-              <Image
-                style={{ width: size, height: size }}
-                source={{
-                  uri: 'https://reactnative.dev/img/tiny_logo.png',
-                }}
-              />
-            );
-          },
-        }}
-      />
-      <Tab.Screen name='Search' component={Search} />
-    </Tab.Navigator>
+    <Stack.Navigator initialRouteName='Home'>
+      <Stack.Screen name='Home' component={Home} />
+      <Stack.Screen name='Search' component={Search} />
+      <Stack.Screen name='Detail' component={Detail} />
+    </Stack.Navigator>
   );
 };
 
 export default Root;
+
