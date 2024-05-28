@@ -15,6 +15,7 @@ export type dataTypes = {
 };
 
 export type RootStackParamList = {
+  TabHome: undefined;
   Home: undefined;
   Detail: { item: dataTypes };
   Search: undefined;
