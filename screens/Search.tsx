@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { ActivityIndicator, FlatList, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
-import Result from '../../components/Result';
-import { dataTypes } from '../../types/typesFile';
+import Result from '../components/Result';
+import { dataTypes } from '../types/typesFile';
 
 const Search = () => {
   const [searchArtist, setSearchArtist] = useState<string>("");
@@ -23,8 +23,6 @@ const Search = () => {
       );
       const jsonData = await response.json();
       setData(jsonData.results);
-      console.log(jsonData);
-      
       setIsLoading(false);
     } catch (error) {
       setError(error as string);

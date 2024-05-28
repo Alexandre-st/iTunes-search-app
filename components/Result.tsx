@@ -1,7 +1,7 @@
-import { NavigationProp, useNavigation } from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import useFetch from '../hook/useFetch';
 import { dataTypes } from '../types/typesFile';
+import Detail from './Detail';
 
 type Props = {
   item: dataTypes;
@@ -13,8 +13,8 @@ const Result = (props: Props) => {
 
   return (
     <TouchableOpacity 
-      style={styles.item}
-      onPress={() => navigation.navigate('Detail')}
+      style={styles.item} 
+      onPress={() => navigation.navigate('Detail', { item })}
     >
       <Image style={styles.image} source={{ uri: item.artworkUrl100 }} />
       <Text style={styles.text}>{item.artistName}</Text>
