@@ -1,4 +1,6 @@
+import { useState } from 'react';
 import { Image, StyleSheet, Text, View } from 'react-native';
+import Stars from 'react-native-stars';
 import { dataTypes } from '../types/typesFile';
 
 type Props = {
@@ -7,6 +9,10 @@ type Props = {
 
 const DetailMusic = (props: Props) => {
   const { item } = props;
+  const [star, setStar] = useState<number>(0);
+
+  console.log(star);
+  
 
   return (
     <View style={stylesDetail.container}>
@@ -16,6 +22,14 @@ const DetailMusic = (props: Props) => {
         <Text>Album : {item.collectionCensoredName}</Text>
         <Text>Meilleur single : {item.trackCensoredName}</Text>
         <Text>Genre : {item.primaryGenreName}</Text>
+      </View>
+      <View style={{ marginTop: 40 }}>
+        <Stars 
+          default={star}
+          update={(value: number) => {setStar(value)}}
+          spacing={10}
+          starSize={30}
+        />
       </View>
     </View>
   );
