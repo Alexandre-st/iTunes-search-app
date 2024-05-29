@@ -9,6 +9,7 @@ const Search = () => {
   const [data, setData] = useState<dataTypes[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
+  const [touched, setTouched] = useState<boolean>(false);
 
   const fetchData = async () => {
     if (!searchArtist) {
@@ -38,10 +39,22 @@ const Search = () => {
   return (
     <View style={{ alignItems: 'center' }}>
       <View style={buttonStyle.container}>
-        <TouchableOpacity style={buttonStyle.button} onPress={() => { setType('musicArtist')}}>
+        <TouchableOpacity 
+          style={[buttonStyle.button, type === 'musicArtist' && buttonStyle.touched]} 
+          onPress={() => { 
+            setType('musicArtist');
+            setTouched(true);
+          }}
+        >
           <Text>Artistes</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={buttonStyle.button} onPress={() => { setType('musicTrack')}}>
+        <TouchableOpacity 
+          style={[buttonStyle.button, type === 'musicTrack' && buttonStyle.touched]} 
+          onPress={() => { 
+            setType('musicTrack');
+            setTouched(true);
+          }}
+        >
           <Text>Musique</Text>
         </TouchableOpacity>
       </View>
@@ -101,6 +114,9 @@ const buttonStyle = StyleSheet.create({
     justifyContent: 'center',
     height: 40,
     padding: '3%',
+  },
+  touched: {
+    backgroundColor: 'gray',
   }
 });
 

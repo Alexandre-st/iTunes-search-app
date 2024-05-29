@@ -16,8 +16,6 @@ const DetailMusic = (props: Props) => {
   const { item } = props;
   const [star, setStar] = useState<number>(0);
 
-  // console.log(star)
-
   const storeData = async (value: number) => {
     try {
       const jsonValue = JSON.stringify(value);

@@ -23,17 +23,41 @@ const Navigator = () => {
           tabBarIcon: ({ size, focused, color }) => {
             return (
               <Image
-                style={{ width: size, height: size }}
-                source={{
-                  uri: 'https://reactnative.dev/img/tiny_logo.png',
-                }}
+                style={{ width: size, height: size, aspectRatio: .8, resizeMode: 'contain' }}
+                source={require('./assets/Home.png')}
               />
             );
           },
         }}
       />
-      <Tab.Screen name='Search' component={Search} />
-      <Tab.Screen name="Favorites" component={Favorites} />
+      <Tab.Screen 
+        name='Search' 
+        component={Search} 
+        options={{
+          tabBarIcon: ({ size, focused, color}) => {
+            return (
+              <Image 
+                style={{ width: size, height: size, aspectRatio: .8, resizeMode: 'contain' }}
+                source={require('./assets/search.png')}
+              />
+            )
+          }
+        }}
+      />
+      <Tab.Screen 
+        name="Favorites" 
+        component={Favorites} 
+        options={{
+          tabBarIcon: ({ size, focused, color}) => {
+            return (
+              <Image 
+                style={{ width: size, height: size, aspectRatio: .8, resizeMode: 'contain' }}
+                source={require('./assets/favorites.png')}
+              />
+            )
+          }
+        }}
+      />
     </Tab.Navigator>
   );
 };
