@@ -5,6 +5,7 @@ import { Image } from 'react-native';
 import Detail from './components/Detail';
 import DetailArtist from './components/DetailArtist';
 import DetailMusic from './components/DetailMusic';
+import Favorites from './screens/Favorites';
 import Home from './screens/Home';
 import Search from './screens/Search';
 import { RootStackParamList } from './types/typesFile';
@@ -32,6 +33,7 @@ const Navigator = () => {
         }}
       />
       <Tab.Screen name='Search' component={Search} />
+      <Tab.Screen name="Favorites" component={Favorites} />
     </Tab.Navigator>
   );
 };

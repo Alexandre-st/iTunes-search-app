@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useEffect, useState } from 'react';
 import { Image, StyleSheet, Text, View } from 'react-native';
 import Stars from 'react-native-stars';
 import { dataTypes } from '../types/typesFile';
@@ -7,12 +8,42 @@ type Props = {
   item: dataTypes;
 };
 
+type storeDataTypes = {
+  value: string;
+};
+
 const DetailMusic = (props: Props) => {
   const { item } = props;
   const [star, setStar] = useState<number>(0);
 
-  console.log(star);
-  
+  // console.log(star)
+
+  const storeData = async (value: number) => {
+    try {
+      const jsonValue = JSON.stringify(value);
+      console.log(jsonValue);
+
+      await AsyncStorage.setItem('star', jsonValue);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const loadData = async () => {
+    try {
+      const jsonValue = await AsyncStorage.getItem('star');
+
+      if (jsonValue != null) {
+        setStar(JSON.parse(jsonValue));
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  useEffect(() => {
+    loadData();
+  }, []);
 
   return (
     <View style={stylesDetail.container}>
@@ -24,9 +55,12 @@ const DetailMusic = (props: Props) => {
         <Text>Genre : {item.primaryGenreName}</Text>
       </View>
       <View style={{ marginTop: 40 }}>
-        <Stars 
+        <Stars
           default={star}
-          update={(value: number) => {setStar(value)}}
+          update={(value: number) => {
+            setStar(value);
+            storeData(value);
+          }}
           spacing={10}
           starSize={30}
         />
@@ -53,7 +87,7 @@ const stylesDetail = StyleSheet.create({
     marginBottom: 20,
   },
   content: {
-    gap: 10
+    gap: 10,
   },
 });
 
