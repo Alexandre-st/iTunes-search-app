@@ -14,6 +14,7 @@ const Result = (props: Props) => {
   const navigation = useNavigation();
   const [likes, setLikes] = useState<dataTypes[]>([]);
 
+  console.log(likes);
   const storeData = async (newLike: dataTypes) => {
     try {
       const jsonValue = await AsyncStorage.getItem('favorites');
@@ -21,27 +22,10 @@ const Result = (props: Props) => {
       const updatedLikes = [...likesData, newLike];
       await AsyncStorage.setItem('favorites', JSON.stringify(updatedLikes));
       setLikes(updatedLikes);
-      
     } catch (error) {
       console.error(error);
     }
   };
-
-  // const loadData = async () => {
-  //   try {
-  //     const jsonValue = await AsyncStorage.getItem('likes');
-  //     if (jsonValue != null) {
-  //       const likesData = JSON.parse(jsonValue) as dataTypes[];
-  //       setLikes(likesData);
-  //     }
-  //   } catch (error) {
-  //     console.error(error);
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   loadData();
-  // }, []);
 
   return (
     <TouchableOpacity 
@@ -53,7 +37,7 @@ const Result = (props: Props) => {
         <Text style={styles.text}>{item.artistName}</Text>
       </View>
       <TouchableOpacity onPress={() => {
-        setLikes(item);
+        // setLikes(item);
         storeData(item);
       }}
       >
