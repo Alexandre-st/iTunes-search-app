@@ -9,7 +9,6 @@ const Favorites = () => {
   const [likes, setLikes] = useState<dataTypes[]>([]);
   const navigation = useNavigation();
 
-  console.log(likes);
   const loadData = async () => {
     try {
       const jsonValue = await AsyncStorage.getItem('favorites');
