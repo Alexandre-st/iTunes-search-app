@@ -42,14 +42,15 @@ const Likes = (props: Props) => {
   }, [likes]);
 
   return (
-    <View>
-      <Text>Hello World</Text>
-      <Text>{item.artistId}</Text>
-      <Text>{item.artistName}</Text>
+    <View style={styles.item}>
+      <View style={styles.content}>
+        <Image style={styles.image} source={{ uri: item.artworkUrl100 }} />
+        <Text style={styles.text}>{item.artistName}</Text>
+      </View>
       <TouchableOpacity
         onPress={() => {
-          removeData(item.artistId);
           // setLikes(item);
+          removeData(item);
         }}
       >
         <Image style={styles.like} source={require('../assets/heart.png')} />
@@ -61,6 +62,30 @@ const Likes = (props: Props) => {
 export default Likes;
 
 const styles = StyleSheet.create({
+  item: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    padding: 10,
+    borderBottomWidth: 1,
+    borderBottomColor: '#ccc',
+    marginTop: 20,
+    width: '90%',
+    margin: 'auto'
+  },
+  content: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  image: {
+    width: 50,
+    height: 50,
+    marginRight: 10,
+  },
+  text: {
+    fontSize: 18,
+    alignSelf: 'center',
+  },
   like: {
     width: 20,
     height: 20,
@@ -69,3 +94,4 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
   },
 });
+

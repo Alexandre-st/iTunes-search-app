@@ -8,6 +8,7 @@ type Props = {
   item: dataTypes;
 };
 
+// Component to manage the different screen, for the different search
 const Detail = () => {
   const route = useRoute();
   const { item } = route.params as Props;

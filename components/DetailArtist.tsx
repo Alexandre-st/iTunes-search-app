@@ -5,6 +5,7 @@ type Props = {
   item: dataTypes;
 };
 
+// I didn't put the like here, because the data isn't good enough to show a quality view. But still the same thing.
 const DetailArtist = (props: Props) => {
   const { item } = props;
 

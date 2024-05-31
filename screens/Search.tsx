@@ -3,6 +3,7 @@ import { ActivityIndicator, FlatList, StyleSheet, Text, TextInput, TouchableOpac
 import Result from '../components/Result';
 import { dataTypes } from '../types/typesFile';
 
+// Heart of the app
 const Search = () => {
   const [searchArtist, setSearchArtist] = useState<string>("");
   const [type, setType] = useState<string>('musicTrack');
@@ -11,6 +12,7 @@ const Search = () => {
   const [error, setError] = useState<string | null>(null);
   const [touched, setTouched] = useState<boolean>(false);
 
+  // Fetching the data to receive the track or artist i want to search
   const fetchData = async () => {
     if (!searchArtist) {
       setData([]);
@@ -87,6 +89,9 @@ const Search = () => {
       {/* Add for the keyExtractor the index.
         Because the API can render the same artist twice. 
         And it need to have an unique ID, with the index concatenate the issue is solved.
+      */}
+      {/* 
+        Rendering a component result to have SOC 
       */}
       <FlatList 
         data={data} 

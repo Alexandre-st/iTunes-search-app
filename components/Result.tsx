@@ -1,20 +1,19 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation } from '@react-navigation/native';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { dataTypes } from '../types/typesFile';
-// import Detail from './Detail';
 
 type Props = {
   item: dataTypes;
 };
-
+// The result for the fetch item
 const Result = (props: Props) => {
   const { item } = props;
   const navigation = useNavigation();
   const [likes, setLikes] = useState<dataTypes[]>([]);
 
-  console.log(likes);
+  // Store the like in the async storage
   const storeData = async (newLike: dataTypes) => {
     try {
       const jsonValue = await AsyncStorage.getItem('favorites');
@@ -59,7 +58,8 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderBottomColor: '#ccc',
     marginTop: 20,
-    width: '90%'
+    width: '90%',
+    margin: 'auto'
   },
   content: {
     flexDirection: 'row',
